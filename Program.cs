@@ -95,6 +95,22 @@ int MinSuminRows(int[,] inArray)
     }
     return row;
 }
+int[,] MultiplyMatrix(int[,] Array1, int[,] Array2)
+{
+    int[,] result = new int[Array1.GetLength(0), Array2.GetLength(1)];
+    for (int i = 0; i < Array1.GetLength(0); i++)
+    {
+        for (int j = 0; j < Array2.GetLength(1); j++)
+        {
+            for (int t = 0; t < Array1.GetLength(1); t++)
+            {
+                result[i, j] += Array1[i, t] * Array2[t, j];
+            }
+
+        }
+    }
+    return result;
+}
 //Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 /*
 Console.WriteLine("Введите количество строк массива: ");
@@ -108,7 +124,7 @@ PrintArray(DescendingRows(NewArray));
 */
 
 //Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
-
+/*
 Console.WriteLine("Введите количество строк массива: ");
 int columns = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите количество столбцов массива: ");
@@ -116,8 +132,32 @@ int rows = Convert.ToInt32(Console.ReadLine());
 int[,] NewArray = GetArray(columns, rows, 0, 10);
 PrintArray(NewArray);
 Console.WriteLine($"Строка с наименьшей суммой элементов под номером: {MinSuminRows(NewArray)}");
+*/
 
 //Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+Console.WriteLine("Введите количество строк массива: ");
+int columnsA = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов массива: ");
+int rowsA = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество строк массива: ");
+int columnsB = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите количество столбцов массива: ");
+int rowsB = Convert.ToInt32(Console.ReadLine());
+if (columnsA != rowsB)
+{
+    Console.WriteLine("Перемножить матрицы не получится.");
+}
+else
+{
+    int[,] A = GetArray(rowsA, columnsA, 0, 10);
+    int[,] B = GetArray(rowsB, columnsB, 0, 10);
+    Console.WriteLine();
+    PrintArray(A);
+    Console.WriteLine();
+    PrintArray(B);
+    Console.WriteLine();
+    PrintArray(MultiplyMatrix(A, B));
+}
 
 //Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, 
 //которая будет построчно выводить массив, добавляя индексы каждого элемента.
