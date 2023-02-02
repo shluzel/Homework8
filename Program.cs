@@ -51,7 +51,7 @@ void PrintArray(int[,] inArray)
     {
         for (int j = 0; j < inArray.GetLength(1); j++)
         {
-            Console.Write($"{inArray[i, j]} ");
+            Console.Write($"{inArray[i, j]}\t");
         }
         Console.WriteLine();
     }
@@ -62,13 +62,14 @@ void Print3DArray(int[,,] inArray)
     {
         for (int j = 0; j < inArray.GetLength(1); j++)
         {
-            for (int t = 0; t < inArray.GetLength(2); t++){
+            for (int t = 0; t < inArray.GetLength(2); t++)
+            {
                 Console.Write($"{inArray[i, j, t]} ({i},{j},{t})");
                 Console.WriteLine();
             }
-            
+
         }
-        
+
     }
 }
 int[,] DescendingRows(int[,] inArray)
@@ -159,6 +160,89 @@ int[,] MultiplyMatrix(int[,] Array1, int[,] Array2)
     }
     return result;
 }
+int[,] GetSpiralArray(int size)
+{
+    int[,] result = new int[size, size];
+    int i = 0;
+    int j = 0;
+    int rowend = size - 1;
+    int columnend = size - 1;
+    int rowstart = 0;
+    int columnstart = 0;
+    bool left = true;
+    bool top = true;
+    int count = 0;
+    while (count < size * size)
+    {
+        count++;
+        result[i, j] = count;
+        if (left && top)
+        {
+            if (j == columnend)
+            {
+                rowstart++;
+                top = true;
+                left = false;
+                i++;
+                continue;
+            }
+            else
+            {
+                j++;
+                continue;
+            }
+        }
+        if (!left && top)
+        {
+            if (i == rowend)
+            {
+                columnend--;
+                top = false;
+                left = false;
+                j--;
+                continue;
+            }
+            else
+            {
+                i++;
+                continue;
+            }
+        }
+        if (!left && !top)
+        {
+            if (j == columnstart)
+            {
+                rowend--;
+                top = false;
+                left = true;
+                i--;
+                continue;
+            }
+            else
+            {
+                j--;
+                continue;
+            }
+        }
+        if (left && !top)
+        {
+            if (i == rowstart)
+            {
+                columnstart++;
+                top = true;
+                left = true;
+                j++;
+                continue;
+            }
+            else
+            {
+                i--;
+                continue;
+            }
+        }
+    }
+    return result;
+}
 //Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
 /*
 Console.WriteLine("Введите количество строк массива: ");
@@ -211,7 +295,7 @@ else
 
 //Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, 
 //которая будет построчно выводить массив, добавляя индексы каждого элемента.
-
+/*
 Console.WriteLine("Введите первую размерность массива: ");
 int FirstDim = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите вторую размерность массива: ");
@@ -220,5 +304,8 @@ Console.WriteLine("Введите третью размерность масси
 int ThirdDim = Convert.ToInt32(Console.ReadLine());
 int [,,] New3DArray = Get3DimensionalArray(FirstDim, SecondDim, ThirdDim);
 Print3DArray(New3DArray);
+*/
 
 //Напишите программу, которая заполнит спирально массив 4 на 4.
+int [,] NewArray = GetSpiralArray(4);
+PrintArray(NewArray);
