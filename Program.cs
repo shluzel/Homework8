@@ -11,6 +11,40 @@ int[,] GetArray(int m, int n, int minValue, int maxValue)
     }
     return result;
 }
+int[,,] Get3DimensionalArray(int a, int b, int c)
+{
+    int[,,] result = new int[a, b, c];
+    for (int i = 0; i < a; i++)
+    {
+        for (int j = 0; j < b; j++)
+        {
+            int t = 0;
+            while (t < c)
+            {
+                int Number = new Random().Next(10, 100);
+                if (SameNumber(result, Number)) continue;
+                result[i, j, t] = Number;
+                t++;
+            }
+
+        }
+    }
+    return result;
+}
+bool SameNumber(int[,,] inArray, int element)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            for (int t = 0; t < inArray.GetLength(2); t++)
+            {
+                if (inArray[i, j, t] == element) return true;
+            }
+        }
+    }
+    return false;
+}
 void PrintArray(int[,] inArray)
 {
     for (int i = 0; i < inArray.GetLength(0); i++)
@@ -20,6 +54,21 @@ void PrintArray(int[,] inArray)
             Console.Write($"{inArray[i, j]} ");
         }
         Console.WriteLine();
+    }
+}
+void Print3DArray(int[,,] inArray)
+{
+    for (int i = 0; i < inArray.GetLength(0); i++)
+    {
+        for (int j = 0; j < inArray.GetLength(1); j++)
+        {
+            for (int t = 0; t < inArray.GetLength(2); t++){
+                Console.Write($"{inArray[i, j, t]} ({i},{j},{t})");
+                Console.WriteLine();
+            }
+            
+        }
+        
     }
 }
 int[,] DescendingRows(int[,] inArray)
@@ -106,7 +155,6 @@ int[,] MultiplyMatrix(int[,] Array1, int[,] Array2)
             {
                 result[i, j] += Array1[i, t] * Array2[t, j];
             }
-
         }
     }
     return result;
@@ -135,6 +183,7 @@ Console.WriteLine($"Строка с наименьшей суммой элеме
 */
 
 //Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+/*
 Console.WriteLine("Введите количество строк массива: ");
 int columnsA = Convert.ToInt32(Console.ReadLine());
 Console.WriteLine("Введите количество столбцов массива: ");
@@ -158,8 +207,18 @@ else
     Console.WriteLine();
     PrintArray(MultiplyMatrix(A, B));
 }
+*/
 
 //Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. Напишите программу, 
 //которая будет построчно выводить массив, добавляя индексы каждого элемента.
+
+Console.WriteLine("Введите первую размерность массива: ");
+int FirstDim = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите вторую размерность массива: ");
+int SecondDim = Convert.ToInt32(Console.ReadLine());
+Console.WriteLine("Введите третью размерность массива: ");
+int ThirdDim = Convert.ToInt32(Console.ReadLine());
+int [,,] New3DArray = Get3DimensionalArray(FirstDim, SecondDim, ThirdDim);
+Print3DArray(New3DArray);
 
 //Напишите программу, которая заполнит спирально массив 4 на 4.
